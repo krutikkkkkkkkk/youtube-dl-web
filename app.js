@@ -29,9 +29,19 @@ app.get('/ytdl', function (req, res) {
         }
         let title = info.title;
         let file_url = info.url;
-        let downloadPage= `  <h3>${title}</h3>
-        <iframe width="560" height="315" src="${file_url}" title="YouTube video player" frameborder="0" allow="gyroscope; picture-in-picture; download" allowfullscreen></iframe>
-    
+        let downloadPage= `
+        <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      </head>
+      <body>
+  <h2>${title}</h2>
+  <div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="${file_url}" allowfullscreen></iframe>
+</div>
         <style>
             *{
                 box-sizing: border-box;
@@ -42,7 +52,7 @@ app.get('/ytdl', function (req, res) {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 90vh;
+            height: 80vh;
             flex-direction: column;
             background-color: #222;
             color: #fff;
@@ -50,11 +60,11 @@ app.get('/ytdl', function (req, res) {
         }
     
       
-        h3{
+        h2{
             position: absolute;
-            top: 4rem;
+            top: 3.5rem;
         }
-        h3::before{
+        h2::before{
             content: '▶';
             background-color: #ff0000;
             padding: .1rem .75rem;
@@ -75,6 +85,15 @@ app.get('/ytdl', function (req, res) {
         a:visited{
             color: rgb(0, 132, 255);
         }
+
+        @media only screen 
+   and (min-width : 580px) {
+   iframe{
+     margin-top: 2rem;
+     height: 315px;
+     width: 560px;
+   }
+}
         </style>
     
     
@@ -87,6 +106,7 @@ app.get('/ytdl', function (req, res) {
         let year = new Date().getFullYear()
         document.getElementById('year').innerHTML = year 
     </script>
+    </body>
         `
        
         res.send(downloadPage)})
