@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Downloader</title>
+</head>
+<style>
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        flex-direction: column;
+        background-color: #222;
+        color: #fff;
+        font-family: sans-serif;
+    }
+    h3{
+        position: absolute;
+        top: 4rem;
+    }
+    h3::before{
+        content: '▶';
+        background-color: #ff0000;
+        padding: .1rem .75rem;
+        margin: .5rem;
+        border-radius: 15px/45px;
+    }
+
+    form{
+        
+        border-radius: 1rem;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.712),
+        -6px -6px 6px rgba(182, 182, 182, 0.075);
+        width: auto;
+        padding: 2.5rem;
+
+      
+    }
+    input[type="url"]{
+        margin:.8rem 0;
+        height: 1.7rem;
+        width: 100%;
+        border-radius: .2rem;
+        outline: none;
+    }
+    input[type="submit"]{
+        width: 100%;
+        padding: .2rem;
+        background-color: #ff0000;
+        border: none;
+        color: #fff;
+        border-radius: .2rem;
+        outline: none;
+        font-weight: bold;
+    }
+
+    footer{
+        position: absolute;
+        bottom: 0;
+        padding: 1.75rem;
+        background-color: rgb(20, 19, 19);
+        width: 100%;
+    }
+    a{
+        color: rgb(0, 132, 255);
+    }
+    a:visited{
+        color: rgb(0, 132, 255);
+    }
+
+    svg{
+    display: none;
+    height: 5rem;
+    width: auto;
+    transition: all 3s ease-in-out;
+    margin-bottom: 2rem;
+    margin-top: -2rem;
+    }
+
+
+</style>
+<body>
+
+    <h3>Youtube Downloader</h3>
+
+    <svg  id="loading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" r="30" stroke="#ffffff" stroke-width="10" fill="none"></circle>
+        <circle cx="50" cy="50" r="30" stroke="#e50914" stroke-width="8" stroke-linecap="round" fill="none">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;180 50 50;720 50 50" keyTimes="0;0.5;1"></animateTransform>
+          <animate attributeName="stroke-dasharray" repeatCount="indefinite" dur="1s" values="18.84955592153876 169.64600329384882;94.2477796076938 94.24777960769377;18.84955592153876 169.64600329384882" keyTimes="0;0.5;1"></animate>
+        </circle>
+        </svg>
+
+   
+
+<form action="/ytdl" method="GET">
+<label for="URL">URL</label> <br>
+<input type="url" name="url" id="url"> <br>
+<input id="getvideo" type="submit" value="Get Video"> 
+</form>
+
+
+
+
+<footer>
+     
+    <p>&copy<span id="year"></span> <a href="https://telegram.me/reboot13_dev" target="_blank">reboot13_dev</a></p>
+    
+</footer>
+
+
+<script>
+    let loading = document.getElementById('loading');
+    let getvideo = document.getElementById('getvideo')
+
+    getvideo.addEventListener('click', ()=> {
+        loading.style.display = 'block';
+    })
+
+
+    let year = new Date().getFullYear()
+    document.getElementById('year').innerHTML = year 
+
+    let url = document.getElementById('url')
+    url.addEventListener('onchange', ()=> {
+        if(!url.match(/^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&\/\#].*)?$/))
+        {
+            alert("Enter Valid youtube url link")
+        }
+    })
+</script>
+</body>
+</html>
